@@ -28,97 +28,90 @@
 
   .poster {
     width: 210mm; height: 297mm; overflow: hidden; position: relative;
-    padding: 34px 40px 30px; display: flex; flex-direction: column;
+    padding: 30px 38px 26px; display: flex; flex-direction: column;
   }
 
   /* ── header ── */
-  .top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
   .brand { display: flex; align-items: center; gap: 12px; }
-  .brand img { width: 48px; height: 48px; object-fit: contain; }
+  .brand img { width: 46px; height: 46px; object-fit: contain; }
   .brand b { display: block; font-weight: 500; font-size: 21px; line-height: 1.15; }
   .brand small { display: block; font-size: 8.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--mute); }
-  .call { display: flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; border-radius: 999px; padding: 8px 18px 8px 9px; }
+  .call { display: flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; border-radius: 999px; padding: 7px 18px 7px 8px; }
   .call i { width: 28px; height: 28px; border-radius: 50%; background: var(--ember); display: grid; place-items: center; }
   .call span { font-size: 9px; color: rgba(255,255,255,.6); display: block; line-height: 1.2; }
   .call strong { font-weight: 500; font-size: 15px; letter-spacing: .02em; line-height: 1.2; }
 
   /* ── title ── */
-  .title { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 20px 0 16px; }
+  .title { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 16px 0 16px; }
   .eyebrow { display: flex; align-items: center; gap: 10px; font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--ember); font-weight: 400; }
   .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--ember); }
-  h1 { margin-top: 6px; font-weight: 500; font-size: 40px; line-height: 1.12; letter-spacing: -.01em; }
+  h1 { margin-top: 4px; font-weight: 500; font-size: 38px; line-height: 1.12; letter-spacing: -.01em; }
   h1 em { font-style: normal; color: var(--ember); }
-  .title p { font-size: 11.5px; line-height: 1.75; color: var(--mute); text-align: right; }
-  .hours { display: inline-flex; align-items: center; gap: 7px; margin-top: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 10.5px; color: var(--ink); }
+  .title p { font-size: 11px; line-height: 1.7; color: var(--mute); text-align: right; }
+  .hours { display: inline-flex; align-items: center; gap: 7px; margin-top: 6px; border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; font-size: 10.5px; color: var(--ink); }
   .hours::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ember); }
 
-  /* ── signature dish ── */
-  .feature { display: grid; grid-template-columns: 1.35fr 1fr; gap: 22px; align-items: stretch; }
-  .feature .photo { position: relative; height: 210px; }
-  .feature .photo::before { content: ""; position: absolute; top: -10px; right: -10px; width: 62%; height: 88%; background: var(--ember-soft); border-radius: 20px; }
-  .feature .photo div { position: relative; height: 100%; border-radius: 20px; overflow: hidden; background: #0b0b0b; }
-  .feature .photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); filter: saturate(1.08) contrast(1.04); }
-  .badge { position: absolute; top: 10px; left: 10px; z-index: 2; background: rgba(255,255,255,.92); border-radius: 999px; padding: 3px 10px; font-size: 9px; letter-spacing: .18em; }
-  .feature .info { display: flex; flex-direction: column; justify-content: space-between; padding: 2px 0; }
-  .feature .info .accent { font-size: 17px; }
-  .feature .en { font-size: 8.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--ember); margin-top: 2px; }
-  .feature h2 { font-weight: 500; font-size: 28px; line-height: 1.2; }
-  .feature .desc { font-size: 11.5px; line-height: 1.7; color: var(--mute); margin-top: 4px; }
-  .rates { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 12px; }
-  .rates div { padding: 9px 12px; }
-  .rates div + div { border-left: 1px solid var(--line); }
-  .rates span { display: block; font-size: 9.5px; color: var(--mute); }
-  .rates b { display: block; font-weight: 500; font-size: 22px; line-height: 1.15; }
-  .rates b small { font-size: 10px; font-weight: 300; color: var(--mute); margin-left: 2px; }
-  .rates div:last-child b { color: var(--ember); }
-
-  /* ── menu grid ── */
-  .menu-head { display: flex; align-items: flex-end; justify-content: space-between; padding: 20px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
-  .menu-head .accent { font-size: 16px; display: block; }
-  .menu-head h3 { font-weight: 500; font-size: 22px; line-height: 1.2; }
-  .menu-head p { font-size: 10px; color: var(--mute); text-align: right; line-height: 1.7; }
-  .grid { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; gap: 14px 16px; }
+  /* ── menu grid: 3 × 3, signature dish spans two columns ── */
+  .grid { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 14px 16px; }
   .card { display: flex; flex-direction: column; min-height: 0; }
+  .card.wide { grid-column: span 2; }
   .card .ph { position: relative; flex: 1; min-height: 0; border-radius: 16px; overflow: hidden; background: var(--soft); }
-  .card .ph img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.08) contrast(1.04); }
-  .card .meta { padding-top: 8px; height: 76px; flex-shrink: 0; display: flex; justify-content: space-between; gap: 8px; }
+  .card .ph img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.08) contrast(1.04); display: block; }
+  .card.wide .ph { background: #0b0b0b; }
+  .badge { position: absolute; top: 9px; left: 9px; z-index: 2; background: rgba(255,255,255,.92); border-radius: 999px; padding: 3px 10px; font-size: 9px; letter-spacing: .18em; }
+  .sig { position: absolute; top: 9px; left: 50px; z-index: 2; font-size: 12.5px; line-height: 1; background: var(--ember); color: #fff; border-radius: 999px; padding: 4px 11px 5px; }
+  .card .meta { padding-top: 7px; height: 62px; flex-shrink: 0; display: flex; justify-content: space-between; gap: 8px; }
   .card .en { font-size: 7.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--ember); }
   .card h4 { font-weight: 500; font-size: 16px; line-height: 1.3; }
-  .card .desc { font-size: 9.5px; line-height: 1.55; color: var(--mute); margin-top: 1px; }
+  .card.wide h4 { font-size: 19px; line-height: 1.2; }
+  .card .desc { font-size: 9.5px; line-height: 1.5; color: var(--mute); }
   .card .price { text-align: right; flex-shrink: 0; padding-top: 10px; }
   .card .price b { display: block; font-weight: 500; font-size: 15px; line-height: 1; }
   .card .price b i { font-style: normal; color: var(--mute); font-weight: 300; margin: 0 2px; }
   .card .price span { display: block; font-size: 8.5px; color: var(--mute); margin-top: 4px; white-space: nowrap; }
 
-  /* ── drinks / extras / how to order ── */
+  /* price / options tile in the last grid slot */
+  .rate-card { background: var(--ember-soft); border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; }
+  .rate-card h5 { display: flex; align-items: baseline; justify-content: space-between; font-weight: 500; font-size: 14px; padding-bottom: 6px; border-bottom: 1px solid rgba(201,85,28,.25); }
+  .rate-card h5 .accent { font-size: 13px; }
+  .rate { display: flex; align-items: baseline; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed rgba(201,85,28,.22); font-size: 12px; }
+  .rate b { font-weight: 500; font-size: 20px; line-height: 1; }
+  .rate b small { font-size: 10px; font-weight: 300; color: var(--mute); margin-left: 2px; }
+  .rate.e b { color: var(--ember); }
+  .opts { margin-top: auto; font-size: 9.5px; line-height: 1.6; color: var(--mute); padding-top: 8px; }
+  .opts b { display: block; font-weight: 500; color: var(--ink); }
+  .opts b + span + b { margin-top: 3px; }
+
+  /* ── drinks / extras / fresh ── */
   .bottom { display: grid; grid-template-columns: 1.75fr 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .box { background: var(--soft); border-radius: 16px; padding: 11px 14px; }
+  .box h5 { display: flex; align-items: baseline; justify-content: space-between; font-weight: 500; font-size: 13px; padding-bottom: 5px; border-bottom: 1px solid var(--line); }
+  .box h5 .accent { font-size: 12px; }
   .rows2 { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; }
   .rows2 .row { border-top: 1px dashed var(--line); }
   .rows2 .row:nth-child(-n+2) { border-top: 0; }
-  .box { background: var(--soft); border-radius: 16px; padding: 12px 14px; }
-  .box h5 { display: flex; align-items: baseline; justify-content: space-between; font-weight: 500; font-size: 13px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
-  .box h5 .accent { font-size: 12px; }
   .row { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; padding: 5px 0; font-size: 11px; }
   .row + .row { border-top: 1px dashed var(--line); }
   .row .p { font-weight: 500; white-space: nowrap; }
   .row .p small { font-weight: 300; font-size: 9px; color: var(--mute); margin: 0 3px 0 6px; }
   .row .p small:first-child { margin-left: 0; }
   .row .p.e { color: var(--ember); }
-  .step { padding: 5px 0; font-size: 10px; line-height: 1.5; color: var(--mute); }
-  .step + .step { border-top: 1px dashed var(--line); }
-  .step b { display: block; font-weight: 500; font-size: 11px; color: var(--ink); }
 
-  /* ── footer band ── */
-  .band { margin-top: 14px; background: var(--ink); color: #fff; border-radius: 18px; padding: 12px 16px 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .band .l span { display: block; font-size: 9.5px; color: rgba(255,255,255,.6); }
-  .band .l strong { display: block; font-weight: 500; font-size: 24px; line-height: 1.2; color: #F0894A; letter-spacing: .01em; }
-  .social { display: flex; gap: 8px; }
-  .social div { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: 5px 13px 5px 5px; }
-  .social img { width: 26px; height: 26px; border-radius: 50%; }
-  .social span { font-size: 8.5px; color: rgba(255,255,255,.55); display: block; line-height: 1.2; }
-  .social b { font-weight: 400; font-size: 11px; display: block; line-height: 1.25; }
-  .foot { display: flex; justify-content: space-between; margin-top: 9px; font-size: 8.5px; color: #ADA49B; }
-  .foot .en { font-size: 8px; letter-spacing: .2em; text-transform: uppercase; }
+  /* ── footer: orange & white, compact ── */
+  .band { margin-top: 12px; background: var(--ember); color: #fff; border-radius: 16px; padding: 7px 7px 7px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .band .l span { display: block; font-size: 9px; color: rgba(255,255,255,.82); }
+  .band .l strong { display: block; font-weight: 500; font-size: 21px; line-height: 1.2; letter-spacing: .01em; }
+  .social { display: flex; gap: 6px; }
+  .social div { display: flex; align-items: center; gap: 7px; background: #fff; color: var(--ink); border-radius: 999px; padding: 4px 12px 4px 4px; }
+  .social img { width: 22px; height: 22px; border-radius: 50%; }
+  .social span { font-size: 7.5px; color: var(--mute); display: block; line-height: 1.2; }
+  .social b { font-weight: 400; font-size: 10px; display: block; line-height: 1.25; }
+  .qr { display: flex; align-items: center; gap: 10px; background: #fff; color: var(--ink); border-radius: 11px; padding: 6px 14px 6px 6px; }
+  .qr img { width: 70px; height: 70px; display: block; }
+  .qr b { display: block; font-weight: 500; font-size: 12px; line-height: 1.35; }
+  .qr b em { font-style: normal; color: var(--ember); }
+  .qr .accent { display: block; font-size: 11px; margin-top: 1px; }
 </style>
 </head>
 <body>
@@ -149,39 +142,24 @@
     </div>
   </section>
 
-  <section class="feature">
-    <div class="photo">
-      <span class="badge">01</span>
-      <div><img src="../img/menu/krapao.jpg" alt="กะเพรา"></div>
-    </div>
-    <div class="info">
-      <div>
-        <span class="accent">Signature</span>
-        <p class="en">Pad Krapao</p>
-        <h2>กะเพรา</h2>
-        <p class="desc">ผัดเผ็ดหอมใบกะเพรา พริกสด กระเทียม<br>ราดข้าวหอมมะลิ</p>
-      </div>
-      <div class="rates">
-        <div><span>หมู / ไก่</span><b class="num">50<small>฿</small></b></div>
-        <div><span>กุ้ง / หมึก</span><b class="num">60<small>฿</small></b></div>
-        <div><span>ไข่ดาว</span><b class="num">+10<small>฿</small></b></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="menu-head">
-    <div><span class="accent">The Menu</span><h3>เมนูจานเดียว</h3></div>
-    <p>เลือกเนื้อ: หมู / ไก่ / กุ้ง / หมึก / รวม<br>ระดับเผ็ด: ไม่เผ็ด / เผ็ดน้อย / เผ็ดกลาง / เผ็ดมาก</p>
-  </div>
-
   <section class="grid">
+    <!-- row 1 -->
+    <article class="card wide">
+      <div class="ph"><span class="badge">01</span><span class="accent sig">Signature</span><img src="../img/menu/krapao.jpg" alt="" style="object-position:50% 55%"></div>
+      <div class="meta">
+        <div><p class="en">Pad Krapao</p><h4>กะเพรา</h4><p class="desc">ผัดเผ็ดหอมใบกะเพรา พริกสด กระเทียม ราดข้าวหอมมะลิ</p></div>
+        <div class="price"><b class="num">50<i>/</i>60</b><span>+ไข่ 10</span></div>
+      </div>
+    </article>
     <article class="card">
-      <div class="ph"><span class="badge">02</span><img src="../img/menu/prik-pao.jpg" alt="" style="object-position:85% 30%; transform:scale(1.14); transform-origin:top right"></div>
+      <div class="ph"><span class="badge">02</span><img src="../img/menu/prik-pao.jpg" alt="" style="object-position:85% 30%; transform:scale(1.12); transform-origin:top right"></div>
       <div class="meta">
         <div><p class="en">Pad Prik Pao</p><h4>ผัดพริกเผา</h4><p class="desc">พริกเผาเข้มข้น หอมกระทะ รสกลมกล่อม</p></div>
         <div class="price"><b class="num">50<i>/</i>60</b><span>+ไข่ 10</span></div>
       </div>
     </article>
+
+    <!-- row 2 -->
     <article class="card">
       <div class="ph"><span class="badge">03</span><img src="../img/menu/prik-gaeng.jpg" alt="" style="object-position:75% 30%; transform:scale(1.1); transform-origin:top right"></div>
       <div class="meta">
@@ -197,12 +175,14 @@
       </div>
     </article>
     <article class="card">
-      <div class="ph"><span class="badge">05</span><img src="../img/menu/khao-pad.jpg" alt="" style="object-position:55% 45%; transform:scale(1.05)"></div>
+      <div class="ph"><span class="badge">05</span><img src="../img/menu/khao-pad.jpg" alt="" style="object-position:50% 50%"></div>
       <div class="meta">
         <div><p class="en">Khao Pad</p><h4>ข้าวผัด</h4><p class="desc">ข้าวผัดกระทะร้อน หอมไข่ มะนาวพริกน้ำปลาเคียง</p></div>
         <div class="price"><b class="num">50<i>/</i>60</b><span>+ไข่ 10</span></div>
       </div>
     </article>
+
+    <!-- row 3 -->
     <article class="card">
       <div class="ph"><span class="badge">06</span><img src="../img/menu/khao-tom.jpg" alt="" style="object-position:50% 45%"></div>
       <div class="meta">
@@ -217,6 +197,13 @@
         <div class="price"><b class="num">50</b><span>หมูสับ 50.-</span></div>
       </div>
     </article>
+    <aside class="rate-card">
+      <h5>ราคาต่อจาน <span class="accent">Prices</span></h5>
+      <div class="rate"><span>หมู / ไก่</span><b class="num">50<small>฿</small></b></div>
+      <div class="rate"><span>กุ้ง / หมึก</span><b class="num">60<small>฿</small></b></div>
+      <div class="rate e"><span>ไข่ดาว</span><b class="num">+10<small>฿</small></b></div>
+      <p class="opts"><b>เลือกเนื้อ</b><span>หมู / ไก่ / กุ้ง / หมึก / รวม</span><b>ระดับเผ็ด</b><span>ไม่เผ็ด / เผ็ดน้อย / เผ็ดกลาง / เผ็ดมาก</span></p>
+    </aside>
   </section>
 
   <section class="bottom">
@@ -247,8 +234,14 @@
       <div><img src="../img/facebook_logo.webp" alt=""><span><span>Facebook</span><b>น้ำเหนือ รีสอร์ท</b></span></div>
       <div><img src="../img/tiktok_logo.webp" alt=""><span><span>TikTok</span><b>@namnueresort</b></span></div>
     </div>
+    <div class="qr">
+      <img src="../img/qr-menu.png" alt="QR code เมนูออนไลน์">
+      <div>
+        <b>สแกน<em>เพื่อดู</em><br>เมนูอาหาร</b>
+        <span class="accent">Scan for menu</span>
+      </div>
+    </div>
   </footer>
-  <div class="foot"><span>ครัวน้ำเหนือ · ทำสดใหม่ทุกจาน</span><span class="en">© 2026 Khua Nam Nuea — All fresh</span></div>
 
 </div>
 </body>
