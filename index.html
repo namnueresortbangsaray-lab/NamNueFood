@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ครัวน้ำเหนือ — อาหารตามสั่ง ทำสดใหม่ทุกจาน</title>
+  <meta name="description" content="ครัวน้ำเหนือ อาหารตามสั่ง ผัดทีละกระทะ ข้าวหอมมะลิใหม่ วัตถุดิบตลาดเช้า เปิดทุกวัน 08:00 - 18:00 โทรสั่ง 089-7491101">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="icon" type="image/webp" href="img/iconheadweb.webp">
+  <link rel="apple-touch-icon" href="img/iconheadweb.webp">
+
+  <!-- Set the theme before first paint (no flash).
+       Default is the white light theme; dark only when the visitor picks it. -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('knn-theme'); } catch (e) {}
+      if (t !== 'dark') t = 'light';
+      document.documentElement.classList.toggle('dark', t === 'dark');
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            paper: 'rgb(var(--paper) / <alpha-value>)',
+            card: 'rgb(var(--card) / <alpha-value>)',
+            ink: 'rgb(var(--ink) / <alpha-value>)',
+            mute: 'rgb(var(--mute) / <alpha-value>)',
+            line: 'rgb(var(--line) / <alpha-value>)',
+            ember: 'rgb(var(--ember) / <alpha-value>)',
+            ember2: 'rgb(var(--ember-soft) / <alpha-value>)',
+          },
+          fontFamily: {
+            sans: ['Prompt', 'system-ui', 'sans-serif'],
+            serif: ['Prompt', 'system-ui', 'sans-serif'],   /* headings use Prompt too */
+            accent: ['"Cormorant Garamond"', 'serif'],
+          },
+          maxWidth: { page: '1160px' },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --paper: 255 255 255;     /* page: pure white */
+      --card: 250 247 243;      /* soft warm panel for contrast sections */
+      --ink: 28 22 18;
+      --mute: 116 106 97;
+      --line: 236 230 223;
+      --ember: 201 85 28;       /* burnt orange */
+      --ember-soft: 248 230 214;
+      color-scheme: light;
+    }
+    :root.dark {
+      --paper: 20 17 14;
+      --card: 30 26 22;
+      --ink: 243 236 228;
+      --mute: 158 146 134;
+      --line: 52 46 40;
+      --ember: 238 132 70;
+      --ember-soft: 58 38 26;
+      color-scheme: dark;
+    }
+
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    body { background: rgb(var(--paper)); color: rgb(var(--ink)); }
+    ::selection { background: rgb(var(--ember)); color: #fff; }
+
+    /* subtle paper grain, kept below 3% so it reads as texture, not effect */
+    .grain::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 60; opacity: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .dark .grain::before { opacity: .05; }
+
+    .logo-light { display: block; } .logo-dark { display: none; }
+    .dark .logo-light { display: none; } .dark .logo-dark { display: block; }
+
+    /* food photography: a touch warmer and richer */
+    .dish-img {
+      filter: saturate(1.08) contrast(1.04);
+      transition: transform 1.2s cubic-bezier(.16,1,.3,1), filter .6s ease;
+    }
+    .dish:hover .dish-img { transform: scale(1.045); }
+    .dark .dish-img { filter: saturate(1.05) contrast(1.06) brightness(.94); }
+
+    /* dotted leader for price lists */
+    .leader { flex: 1; border-bottom: 1px dotted rgb(var(--mute) / .45); transform: translateY(-4px); margin: 0 .6rem; min-width: 1.5rem; }
+
+    /* reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .9s ease, transform .9s cubic-bezier(.16,1,.3,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .rise { animation: rise 1s cubic-bezier(.16,1,.3,1) both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+    @media (prefers-reduced-motion: reduce) {
+      .rise { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .dish-img { transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* dish sheet */
+    dialog::backdrop { background: rgb(12 9 7 / .55); backdrop-filter: blur(3px); }
+    dialog[open] { animation: sheet-in .45s cubic-bezier(.16,1,.3,1); }
+    @keyframes sheet-in { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .opt { border: 1px solid rgb(var(--line)); }
+    .opt[aria-pressed="true"] { border-color: rgb(var(--ember)); background: rgb(var(--ember-soft)); color: rgb(var(--ink)); }
+
+    .safe-b { padding-bottom: max(14px, env(safe-area-inset-bottom)); }
+    .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { scrollbar-width: none; }
+  </style>
+</head>
+
+<body class="grain font-sans antialiased font-light">
+
+  <!-- ─────────── Top bar ─────────── -->
+  <header id="top" class="sticky top-0 z-40 bg-paper/85 backdrop-blur-md border-b border-line/80">
+    <div class="mx-auto max-w-page px-4 sm:px-8 h-16 sm:h-[72px] flex items-center justify-between gap-3">
+      <a href="#top" class="flex items-center gap-3 min-w-0" aria-label="ครัวน้ำเหนือ หน้าแรก">
+        <img src="img/logo.webp" alt="" class="logo-light w-10 h-10 sm:w-11 sm:h-11 object-contain" width="44" height="44">
+        <img src="img/logo_white.webp" alt="" class="logo-dark w-10 h-10 sm:w-11 sm:h-11 object-contain" width="44" height="44">
+        <span class="leading-tight min-w-0">
+          <span class="block font-serif text-[17px] sm:text-[19px] font-medium tracking-tight">ครัวน้ำเหนือ</span>
+          <span class="block text-[9.5px] sm:text-[10px] tracking-[.12em] sm:tracking-[.22em] uppercase text-mute truncate">Khua Nam Nuea · Made to order</span>
+        </span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-[13px] text-mute">
+        <a href="#menu" class="hover:text-ink transition-colors">เมนู</a>
+        <a href="#drinks" class="hover:text-ink transition-colors">เครื่องดื่ม</a>
+        <a href="#info" class="hover:text-ink transition-colors">วิธีสั่ง</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button id="themeBtn" type="button" class="w-10 h-10 rounded-full border border-line grid place-items-center text-mute hover:text-ink hover:border-ink/30 transition" aria-label="สลับโหมดสว่าง / มืด">
+          <!-- sun -->
+          <svg class="hidden dark:block w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+          <!-- moon -->
+          <svg class="block dark:hidden w-[17px] h-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        </button>
+        <a href="tel:0897491101" class="hidden sm:inline-flex items-center gap-2 h-10 pl-4 pr-5 rounded-full bg-ink text-paper text-[13px] font-normal hover:bg-ember transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+          089-7491101
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ─────────── Hero ─────────── -->
+    <section class="mx-auto max-w-page px-4 sm:px-8 pt-10 sm:pt-16 lg:pt-20 pb-14 sm:pb-20">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div class="lg:col-span-6 rise">
+          <p class="flex items-center gap-3 text-[11px] tracking-[.28em] uppercase text-ember font-normal">
+            <span class="w-8 h-px bg-ember"></span> Thai kitchen · Bang Saray
+          </p>
+
+          <h1 class="mt-6 font-serif font-medium text-[44px] leading-[1.12] sm:text-[60px] lg:text-[68px] tracking-tight">
+            ตามสั่ง<br>
+            <span class="text-ember">ทำสดใหม่</span>ทุกจาน
+          </h1>
+
+          <p class="mt-6 max-w-[34ch] text-[15px] sm:text-base leading-[1.9] text-mute">
+            ข้าวหอมมะลิใหม่ วัตถุดิบตลาดเช้า<br>
+            ผัดทีละกระทะ ไม่ทำค้าง
+          </p>
+
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <a href="#menu" class="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-ember text-white text-[14px] font-normal hover:brightness-110 transition">
+              ดูเมนูทั้งหมด
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+            </a>
+            <span id="openBadge" class="inline-flex items-center gap-2 h-12 px-5 rounded-full border border-line text-[13px] text-mute">
+              <span class="relative flex w-2 h-2">
+                <span data-dot-ping class="absolute inline-flex w-full h-full rounded-full bg-emerald-500 opacity-60 animate-ping"></span>
+                <span data-dot class="relative inline-flex w-2 h-2 rounded-full bg-emerald-500"></span>
+              </span>
+              <span data-label>เปิดทุกวัน 08:00 - 18:00</span>
+            </span>
+          </div>
+
+          <dl class="mt-12 grid grid-cols-3 max-w-md border-t border-line pt-6">
+            <div>
+              <dt class="text-[12.5px] text-mute">หมู / ไก่</dt>
+              <dd class="mt-1 font-serif text-[28px] leading-none">50<span class="text-[13px] text-mute font-sans ml-1">฿</span></dd>
+            </div>
+            <div class="border-l border-line pl-5">
+              <dt class="text-[12.5px] text-mute">กุ้ง / หมึก</dt>
+              <dd class="mt-1 font-serif text-[28px] leading-none">60<span class="text-[13px] text-mute font-sans ml-1">฿</span></dd>
+            </div>
+            <div class="border-l border-line pl-5">
+              <dt class="text-[12.5px] text-mute">ไข่ดาว</dt>
+              <dd class="mt-1 font-serif text-[28px] leading-none">+10<span class="text-[13px] text-mute font-sans ml-1">฿</span></dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="lg:col-span-6 rise" style="animation-delay:.15s">
+          <figure class="relative">
+            <div class="absolute -top-4 -right-2 sm:-right-4 w-2/3 h-[85%] rounded-[28px] bg-ember2" aria-hidden="true"></div>
+            <div class="relative overflow-hidden rounded-[28px] bg-[#0b0b0b] aspect-[5/4] shadow-[0_30px_60px_-30px_rgba(60,30,10,.45)]">
+              <img src="img/menu/krapao.jpg" alt="กะเพราหมูสับ ไข่ดาวกรอบ ราดข้าวหอมมะลิ" class="dish-img w-full h-full object-cover scale-[1.06]" fetchpriority="high">
+            </div>
+            <figcaption class="relative mt-4 flex items-baseline justify-between text-[12px] text-mute">
+              <span><span class="font-accent italic text-[17px] text-ink">Signature</span> — กะเพรา ไข่ดาวขอบกรอบ</span>
+              <span class="tracking-[.2em]">No. 01</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── Menu ─────────── -->
+    <section id="menu" class="scroll-mt-20 border-t border-line">
+      <div class="mx-auto max-w-page px-4 sm:px-8 pt-14 sm:pt-20 pb-6">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 reveal">
+          <div>
+            <p class="font-accent italic text-[20px] text-ember">The Menu</p>
+            <h2 class="mt-1 font-serif text-[34px] sm:text-[44px] font-medium tracking-tight leading-tight">เมนูจานเดียว</h2>
+          </div>
+          <p class="text-[13px] leading-[1.8] text-mute sm:text-right">
+            7 จานประจำครัว ·แตะที่จานเพื่อเลือกเนื้อและความเผ็ด<br class="hidden sm:block">
+            หมู/ไก่ 50 · กุ้ง/หมึก 60 · ไข่ดาว +10
+          </p>
+        </div>
+      </div>
+
+      <div id="dishGrid" class="mx-auto max-w-page px-4 sm:px-8 pb-16 sm:pb-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-8 gap-y-12 sm:gap-y-16 pt-6"></div>
+    </section>
+
+    <!-- ─────────── Drinks & extras ─────────── -->
+    <section id="drinks" class="scroll-mt-20 bg-card border-y border-line">
+      <div class="mx-auto max-w-page px-4 sm:px-8 py-14 sm:py-20">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 reveal">
+          <div>
+            <p class="font-accent italic text-[20px] text-ember">Drinks & sides</p>
+            <h2 class="mt-1 font-serif text-[30px] sm:text-[40px] font-medium tracking-tight leading-tight">เครื่องดื่ม &amp; ของเพิ่ม</h2>
+          </div>
+          <p class="text-[13px] text-mute">ราคาเป็นบาท</p>
+        </div>
+
+        <div class="mt-8 sm:mt-10 grid md:grid-cols-[1.45fr_1fr] gap-4 sm:gap-6 items-start">
+          <!-- Drinks -->
+          <div class="rounded-[24px] bg-paper border border-line p-5 sm:p-7 reveal">
+            <div class="flex items-center gap-3 pb-4 border-b border-line">
+              <span class="w-10 h-10 rounded-full bg-ember2 text-ember grid place-items-center" aria-hidden="true">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l-1.6 16.2A2 2 0 0 1 14.4 21H9.6a2 2 0 0 1-2-1.8L6 3Z"/><path d="M6.5 8h11"/></svg>
+              </span>
+              <h3 class="font-serif text-[20px] font-medium">เครื่องดื่ม</h3>
+            </div>
+            <ul id="drinkList" class="divide-y divide-line"></ul>
+          </div>
+
+          <!-- Extras -->
+          <div class="rounded-[24px] bg-paper border border-line p-5 sm:p-7 reveal">
+            <div class="flex items-center gap-3 pb-4 border-b border-line">
+              <span class="w-10 h-10 rounded-full bg-ember2 text-ember grid place-items-center" aria-hidden="true">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18a9 9 0 0 1-18 0Z"/><path d="M8 7c0-1.5 1-1.5 1-3M12 7c0-1.5 1-1.5 1-3M16 7c0-1.5 1-1.5 1-3"/></svg>
+              </span>
+              <h3 class="font-serif text-[20px] font-medium">ของเพิ่ม</h3>
+            </div>
+            <ul class="divide-y divide-line">
+              <li class="flex items-center justify-between gap-4 py-4">
+                <span class="text-[16px] font-normal">ข้าวเปล่า</span>
+                <span class="font-serif text-[20px] tabular-nums">10</span>
+              </li>
+              <li class="flex items-center justify-between gap-4 py-4">
+                <span>
+                  <span class="block text-[16px] font-normal">ไข่ดาว / ไข่เจียว</span>
+                  <span class="block mt-0.5 text-[12.5px] text-mute">บวกเพิ่มจากราคาจาน</span>
+                </span>
+                <span class="font-serif text-[20px] tabular-nums text-ember">+10</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── How to order ─────────── -->
+    <section id="info" class="scroll-mt-20 mx-auto max-w-page px-4 sm:px-8 py-14 sm:py-20">
+      <div class="grid sm:grid-cols-3 gap-px bg-line border border-line rounded-[22px] overflow-hidden reveal">
+        <div class="bg-paper p-6 sm:p-8">
+          <p class="font-accent italic text-[26px] text-ember leading-none">i.</p>
+          <h3 class="mt-4 font-serif text-[19px] font-medium">เลือกเนื้อ</h3>
+          <p class="mt-2 text-[14px] leading-[1.8] text-mute">หมู / ไก่ / กุ้ง / หมึก / รวม</p>
+        </div>
+        <div class="bg-paper p-6 sm:p-8">
+          <p class="font-accent italic text-[26px] text-ember leading-none">ii.</p>
+          <h3 class="mt-4 font-serif text-[19px] font-medium">ระดับเผ็ด</h3>
+          <p class="mt-2 text-[14px] leading-[1.8] text-mute">ไม่เผ็ด / เผ็ดน้อย / เผ็ดกลาง / เผ็ดมาก</p>
+        </div>
+        <div class="bg-paper p-6 sm:p-8">
+          <p class="font-accent italic text-[26px] text-ember leading-none">iii.</p>
+          <h3 class="mt-4 font-serif text-[19px] font-medium">รอสักครู่</h3>
+          <p class="mt-2 text-[14px] leading-[1.8] text-mute">ทำสดใหม่ทุกจาน รอ 7-12 นาที<br>รูปจริงจากครัว ไม่ใช้ภาพสต็อก</p>
+        </div>
+      </div>
+
+      <div class="mt-12 sm:mt-16 rounded-[28px] bg-ink text-paper px-6 py-10 sm:px-12 sm:py-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8 reveal">
+        <div>
+          <p class="text-[13px] text-paper/60">โทรสั่ง · เปิดทุกวัน 08:00 - 18:00</p>
+          <p class="mt-3 font-serif text-[30px] sm:text-[40px] leading-tight">หิวแล้วใช่ไหม<span class="text-ember">?</span></p>
+        </div>
+        <a href="tel:0897491101" class="inline-flex items-center justify-center gap-3 h-14 px-8 rounded-full bg-ember text-white text-[17px] font-normal tracking-wide hover:brightness-110 transition self-start md:self-auto">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+          089-7491101
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─────────── Footer ─────────── -->
+  <footer class="border-t border-line">
+    <div class="mx-auto max-w-page px-4 sm:px-8 pt-12 pb-28 sm:pb-12 grid gap-8 md:grid-cols-12 md:items-end">
+      <div class="md:col-span-6">
+        <img src="img/logo-namnue-resort.webp" alt="น้ำเหนือ รีสอร์ท บางเสร่" class="h-14 sm:h-16 w-auto dark:brightness-110" loading="lazy">
+        <p class="mt-5 text-[13px] leading-[1.8] text-mute">ครัวน้ำเหนือ · ทำสดใหม่ทุกจาน • รูปจริงจากครัว</p>
+      </div>
+      <div class="md:col-span-6 flex flex-col md:items-end gap-5">
+        <div class="flex items-center gap-3">
+          <a href="https://www.facebook.com/profile.php?id=100063506773137" target="_blank" rel="noopener" class="w-10 h-10 rounded-full border border-line grid place-items-center hover:border-ember transition" aria-label="Facebook น้ำเหนือ รีสอร์ท">
+            <img src="img/facebook_logo.webp" alt="" class="w-5 h-5" loading="lazy">
+          </a>
+          <a href="https://www.tiktok.com/@namnueresort" target="_blank" rel="noopener" class="w-10 h-10 rounded-full border border-line grid place-items-center hover:border-ember transition" aria-label="TikTok @namnueresort">
+            <img src="img/tiktok_logo.webp" alt="" class="w-5 h-5 rounded-full" loading="lazy">
+          </a>
+          <a href="tel:0897491101" class="ml-2 text-[15px] font-normal hover:text-ember transition-colors">089-7491101</a>
+        </div>
+        <p class="text-[10px] tracking-[.22em] uppercase text-mute">© 2026 Khua Nam Nuea — All fresh</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─────────── Mobile call bar ─────────── -->
+  <div class="sm:hidden fixed inset-x-0 bottom-0 z-40 px-4 pt-3 safe-b bg-gradient-to-t from-paper via-paper/95 to-paper/0">
+    <a href="tel:0897491101" class="flex items-center justify-between h-14 pl-5 pr-2 rounded-full bg-ink text-paper shadow-[0_12px_30px_-12px_rgba(0,0,0,.5)]">
+      <span class="text-[14px]">โทรสั่งเลย <span class="text-paper/55 ml-1">089-7491101</span></span>
+      <span class="w-10 h-10 rounded-full bg-ember grid place-items-center text-white">
+        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+      </span>
+    </a>
+  </div>
+
+  <!-- ─────────── Follow us modal ─────────── -->
+  <dialog id="follow" class="p-0 m-auto w-[calc(100%-32px)] max-w-[400px] rounded-[28px] bg-paper text-ink overflow-hidden" aria-labelledby="followTitle">
+    <div class="relative px-6 pt-8 pb-6 sm:px-8 text-center">
+      <button type="button" data-close class="absolute top-3 right-3 w-10 h-10 rounded-full grid place-items-center text-mute hover:text-ink hover:bg-line/60 transition" aria-label="ปิด">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+
+      <div class="mx-auto w-20 h-20 rounded-full bg-ember2 grid place-items-center">
+        <img src="img/logo.webp" alt="" class="logo-light w-14 h-14 object-contain">
+        <img src="img/logo_white.webp" alt="" class="logo-dark w-14 h-14 object-contain">
+      </div>
+      <p class="mt-5 font-accent italic text-[19px] text-ember">Follow along</p>
+      <h2 id="followTitle" class="mt-1 font-serif text-[24px] font-medium leading-snug">ติดตามน้ำเหนือ รีสอร์ท</h2>
+      <p class="mt-2 text-[14px] leading-[1.8] text-mute">กดติดตามเพจไว้ ไม่พลาดเมนูใหม่<br>และข่าวสารจากครัวของเรา</p>
+
+      <div class="mt-6 grid gap-2.5">
+        <a href="https://www.facebook.com/profile.php?id=100063506773137" target="_blank" rel="noopener" data-follow class="flex items-center gap-3 h-14 pl-2 pr-5 rounded-full border border-line hover:border-ember bg-card transition">
+          <img src="img/facebook_logo.webp" alt="" class="w-10 h-10">
+          <span class="flex-1 text-left text-[15px] font-normal">Facebook</span>
+          <span class="text-[13px] text-ember">กดติดตาม →</span>
+        </a>
+        <a href="https://www.tiktok.com/@namnueresort" target="_blank" rel="noopener" data-follow class="flex items-center gap-3 h-14 pl-2 pr-5 rounded-full border border-line hover:border-ember bg-card transition">
+          <img src="img/tiktok_logo.webp" alt="" class="w-10 h-10 rounded-full">
+          <span class="flex-1 text-left leading-tight">
+            <span class="block text-[15px] font-normal">TikTok</span>
+            <span class="block text-[12px] text-mute">@namnueresort</span>
+          </span>
+          <span class="text-[13px] text-ember">กดติดตาม →</span>
+        </a>
+      </div>
+
+      <button type="button" data-close class="mt-4 h-10 px-5 text-[13px] text-mute hover:text-ink transition">ไว้ทีหลัง</button>
+    </div>
+  </dialog>
+
+  <!-- ─────────── Dish sheet ─────────── -->
+  <dialog id="sheet" class="p-0 m-0 mt-auto sm:m-auto w-full max-w-full sm:max-w-[560px] max-h-[92dvh] rounded-t-[28px] sm:rounded-[28px] bg-paper text-ink overflow-hidden" aria-labelledby="sheetTitle">
+    <div class="max-h-[92dvh] overflow-y-auto no-scrollbar">
+      <div class="relative">
+        <div class="aspect-[16/11] overflow-hidden bg-card">
+          <img id="sheetImg" src="" alt="" class="dish-img w-full h-full object-cover">
+        </div>
+        <button type="button" data-close class="absolute top-3 right-3 w-10 h-10 rounded-full bg-paper/90 backdrop-blur grid place-items-center" aria-label="ปิด">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        <span class="absolute top-3 sm:hidden w-10 h-1 rounded-full bg-white/70 left-1/2 -translate-x-1/2" aria-hidden="true"></span>
+      </div>
+
+      <div class="px-5 sm:px-8 pt-6 pb-4">
+        <p id="sheetEn" class="text-[11px] tracking-[.24em] uppercase text-ember"></p>
+        <h3 id="sheetTitle" class="mt-1 font-serif text-[30px] font-medium leading-tight"></h3>
+        <p id="sheetDesc" class="mt-2 text-[14px] leading-[1.8] text-mute"></p>
+
+        <div id="sheetOpts">
+        <div class="mt-6">
+          <p class="text-[13px] text-mute">เลือกเนื้อ</p>
+          <div id="optMeat" class="mt-3 flex flex-wrap gap-2"></div>
+        </div>
+        <div class="mt-5">
+          <p class="text-[13px] text-mute">ระดับเผ็ด</p>
+          <div id="optSpice" class="mt-3 flex flex-wrap gap-2"></div>
+        </div>
+        <div class="mt-5">
+          <p class="text-[13px] text-mute">ไข่</p>
+          <div id="optEgg" class="mt-3 flex flex-wrap gap-2"></div>
+        </div>
+        </div>
+      </div>
+
+      <div class="sticky bottom-0 px-5 sm:px-8 pt-4 safe-b bg-paper border-t border-line">
+        <div class="flex items-center justify-between gap-4 pb-1">
+          <div class="min-w-0">
+            <p id="sheetSummary" class="text-[13px] text-mute truncate"></p>
+            <p class="font-serif text-[28px] leading-none mt-1"><span id="sheetTotal">50</span><span class="text-[14px] font-sans text-mute ml-1">บาท</span></p>
+          </div>
+          <a href="tel:0897491101" class="shrink-0 inline-flex items-center gap-2 h-12 px-6 rounded-full bg-ember text-white text-[15px] font-normal hover:brightness-110 transition">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+            โทรสั่ง
+          </a>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    /* ---------- Data ---------- */
+    const DISHES = [
+      { id: 'krapao',     th: 'กะเพรา',       en: 'Pad Krapao',     desc: 'ผัดเผ็ดหอมใบกะเพรา พริกสด กระเทียม ราดข้าวหอมมะลิ',     img: 'img/menu/krapao.jpg',      fit: 'object-[50%_50%]' },
+      { id: 'prikpao',    th: 'ผัดพริกเผา',    en: 'Pad Prik Pao',   desc: 'พริกเผาเข้มข้น หอมกระทะ รสกลมกล่อม',                     img: 'img/menu/prik-pao.jpg',    fit: 'object-[80%_30%] scale-[1.14] origin-top-right' },
+      { id: 'prikgaeng',  th: 'ผัดพริกแกง',    en: 'Pad Prik Gaeng', desc: 'พริกแกงหอมเครื่อง เผ็ดกำลังดี',                           img: 'img/menu/prik-gaeng.jpg',  fit: 'object-[70%_30%] scale-[1.1] origin-top-right' },
+      { id: 'kratiem',    th: 'ทอดกระเทียม',   en: 'Tod Kratiem',    desc: 'ทอดกระเทียมหอมเจียวกรอบ พริกไทยดำ',                      img: 'img/menu/tod-kratiem.jpg', fit: 'object-[55%_50%]' },
+      { id: 'khaopad',    th: 'ข้าวผัด',       en: 'Khao Pad',       desc: 'ข้าวผัดกระทะร้อน หอมไข่ มะนาวพริกน้ำปลาเคียง',            img: 'img/menu/khao-pad.jpg',    fit: 'object-[55%_45%] scale-[1.05]' },
+      { id: 'khaotom',    th: 'ข้าวต้ม',       en: 'Khao Tom',       desc: 'ข้าวต้มทรงเครื่อง น้ำซุปร้อนใส กระเทียมเจียว',             img: 'img/menu/khao-tom.jpg',    fit: 'object-[50%_45%]' },
+      { id: 'khaijiaomoosap', th: 'ไข่เจียวหมูสับ', en: 'Khai Jiao Moo Sap', desc: 'ไข่เจียวหมูสับฟูกรอบ ทอดใหม่ หอมๆ เสิร์ฟพร้อมซอสพริก', img: 'img/menu/khai-jiao-moo-sap.webp', fit: 'object-[55%_55%]',
+        price: 50, priceNote: 'หมูสับ 50.-', wide: true },
+    ];
+    const SOCIAL = {
+      facebook: 'https://www.facebook.com/profile.php?id=100063506773137',
+      tiktok: 'https://www.tiktok.com/@namnueresort',
+    };
+    const DRINKS = [
+      { th: 'น้ำเปล่า', opts: [['เล็ก', 10], ['ใหญ่', 20]] },
+      { th: 'น้ำแข็ง',  opts: [['', 15]] },
+      { th: 'น้ำอัดลม', opts: [['เล็ก', 25], ['ใหญ่', 50]] },
+      { th: 'เบียร์',   opts: [['ช้าง / ลีโอ', 70], ['สิงห์', 80]] },
+    ];
+    const MEATS = [
+      { th: 'หมู', price: 50 }, { th: 'ไก่', price: 50 },
+      { th: 'กุ้ง', price: 60 }, { th: 'หมึก', price: 60 },
+    ];
+    const SPICE = ['ไม่เผ็ด', 'เผ็ดน้อย', 'เผ็ดกลาง', 'เผ็ดมาก'];
+    const EGG = [{ th: 'ไม่ใส่', add: 0 }, { th: 'ไข่ดาว', add: 10 }, { th: 'ไข่เจียว', add: 10 }];
+
+    /* ---------- Menu grid ---------- */
+    const grid = document.getElementById('dishGrid');
+    const priceBlock = d => d.price
+      ? `<p class="font-serif text-[20px] leading-none tabular-nums">${d.price}</p>
+         <p class="mt-1.5 text-[11px] text-mute">${d.priceNote || ''}</p>`
+      : `<p class="font-serif text-[20px] leading-none tabular-nums">50<span class="text-mute mx-1 font-sans font-light">/</span>60</p>
+         <p class="mt-1.5 text-[11px] text-mute">+ไข่ 10</p>`;
+
+    /* The 7th plate closes the grid as a full-width row: image left, text right */
+    const wideCard = (d, i) => `
+      <article class="dish reveal sm:col-span-2 lg:col-span-3">
+        <button type="button" data-dish="${d.id}" class="group w-full text-left focus:outline-none grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-8 sm:items-center" aria-label="ดูรายละเอียด ${d.th}">
+          <div class="relative overflow-hidden rounded-[22px] bg-card aspect-[4/3] lg:col-span-2 lg:aspect-[16/8] ring-1 ring-line/60 group-focus-visible:ring-2 group-focus-visible:ring-ember">
+            <img src="${d.img}" alt="${d.th}" class="dish-img w-full h-full object-cover ${d.fit}" loading="lazy" width="1080" height="770">
+            <span class="absolute top-3 left-3 h-7 px-3 rounded-full bg-paper/90 backdrop-blur text-[11px] tracking-[.18em] grid place-items-center text-ink">${String(i + 1).padStart(2, '0')}</span>
+          </div>
+          <div class="pt-5 sm:pt-0 sm:pl-2 lg:pl-4">
+            <p class="text-[10.5px] tracking-[.24em] uppercase text-ember">${d.en}</p>
+            <h3 class="mt-1 font-serif text-[24px] sm:text-[30px] font-medium leading-snug">${d.th}</h3>
+            <p class="mt-2 text-[14px] leading-[1.75] text-mute max-w-[34ch]">${d.desc}</p>
+            <div class="mt-5 sm:mt-7 flex items-end justify-between sm:justify-start gap-6 border-t border-line pt-4">
+              <div>${priceBlock(d)}</div>
+              <span class="inline-flex items-center gap-2 h-10 pl-4 pr-1.5 rounded-full border border-line text-[13px] group-hover:border-ember transition">
+                เลือกจานนี้
+                <span class="w-7 h-7 rounded-full bg-ember text-white grid place-items-center">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                </span>
+              </span>
+            </div>
+          </div>
+        </button>
+      </article>`;
+
+    grid.innerHTML = DISHES.map((d, i) => d.wide ? wideCard(d, i) : `
+      <article class="dish reveal" style="transition-delay:${(i % 3) * 90}ms">
+        <button type="button" data-dish="${d.id}" class="group block w-full text-left focus:outline-none" aria-label="ดูรายละเอียด ${d.th}">
+          <div class="relative overflow-hidden rounded-[22px] bg-card aspect-[4/3] ring-1 ring-line/60 group-focus-visible:ring-2 group-focus-visible:ring-ember">
+            <img src="${d.img}" alt="${d.th}" class="dish-img w-full h-full object-cover ${d.fit}" loading="${i < 2 ? 'eager' : 'lazy'}" width="720" height="540">
+            <span class="absolute top-3 left-3 h-7 px-3 rounded-full bg-paper/90 backdrop-blur text-[11px] tracking-[.18em] grid place-items-center text-ink">${String(i + 1).padStart(2, '0')}</span>
+            <span class="absolute bottom-3 right-3 h-9 pl-3 pr-1.5 rounded-full bg-paper/90 backdrop-blur text-[12px] text-ink flex items-center gap-2 opacity-100 sm:opacity-0 sm:translate-y-1 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 transition">
+              เลือกจานนี้
+              <span class="w-6 h-6 rounded-full bg-ember text-white grid place-items-center">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </span>
+          </div>
+          <div class="pt-5 flex items-start justify-between gap-4">
+            <div class="min-w-0">
+              <p class="text-[10.5px] tracking-[.24em] uppercase text-ember">${d.en}</p>
+              <h3 class="mt-1 font-serif text-[24px] font-medium leading-snug">${d.th}</h3>
+              <p class="mt-1.5 text-[14px] leading-[1.75] text-mute max-w-[34ch]">${d.desc}</p>
+            </div>
+            <div class="shrink-0 text-right pt-[18px]">${priceBlock(d)}</div>
+          </div>
+        </button>
+      </article>`).join('');
+
+    /* ---------- Drinks ---------- */
+    /* Each size / brand gets its own price tag so it reads at a glance */
+    document.getElementById('drinkList').innerHTML = DRINKS.map(d => `
+      <li class="flex items-center justify-between gap-3 py-4">
+        <span class="text-[16px] font-normal whitespace-nowrap">${d.th}</span>
+        <span class="flex flex-wrap justify-end gap-2">
+          ${d.opts.map(([label, price]) => label
+            ? `<span class="inline-flex items-baseline gap-2 h-9 pl-3 pr-3.5 rounded-full bg-card border border-line">
+                 <span class="text-[12.5px] text-mute">${label}</span>
+                 <span class="font-serif text-[17px] tabular-nums leading-9">${price}</span>
+               </span>`
+            : `<span class="font-serif text-[20px] tabular-nums pr-1">${price}</span>`).join('')}
+        </span>
+      </li>`).join('');
+
+    /* ---------- Theme ---------- */
+    const root = document.documentElement;
+    document.getElementById('themeBtn').addEventListener('click', () => {
+      const next = root.classList.contains('dark') ? 'light' : 'dark';
+      root.classList.toggle('dark', next === 'dark');
+      root.dataset.theme = next;
+      try { localStorage.setItem('knn-theme', next); } catch (e) {}
+      document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute('content', next === 'dark' ? '#14110E' : '#FFFFFF'));
+    });
+
+    /* ---------- Open / closed (Bangkok time, 08:00–18:00) ---------- */
+    (function () {
+      const badge = document.getElementById('openBadge');
+      const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Bangkok', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date());
+      const h = +parts.find(p => p.type === 'hour').value, m = +parts.find(p => p.type === 'minute').value;
+      const mins = h * 60 + m, open = mins >= 8 * 60 && mins < 18 * 60;
+      badge.querySelector('[data-label]').textContent = open ? 'ครัวเปิดอยู่ · ถึง 18:00' : 'ปิดแล้ว · เปิด 08:00 น.';
+      if (!open) {
+        badge.querySelector('[data-dot-ping]').remove();
+        badge.querySelector('[data-dot]').className = 'relative inline-flex w-2 h-2 rounded-full bg-mute';
+      }
+    })();
+
+    /* ---------- Reveal on scroll ---------- */
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -8% 0px' }) : null;
+    document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+    /* ---------- Dish sheet ---------- */
+    const sheet = document.getElementById('sheet');
+    const state = { dish: null, meat: 0, spice: 2, egg: 0 };
+
+    function chips(el, items, key, label) {
+      el.innerHTML = items.map((it, i) => `<button type="button" class="opt h-10 px-4 rounded-full text-[14px] text-mute transition" data-key="${key}" data-i="${i}" aria-pressed="${state[key] === i}">${label(it)}</button>`).join('');
+    }
+    function render() {
+      const d = state.dish;
+      document.getElementById('sheetOpts').hidden = !!d.price;
+      if (d.price) {
+        document.getElementById('sheetTotal').textContent = d.price;
+        document.getElementById('sheetSummary').textContent = `${d.th} · ${d.priceNote || ''}`;
+        return;
+      }
+      chips(document.getElementById('optMeat'), MEATS, 'meat', m => `${m.th} <span class="opacity-60 ml-1 tabular-nums">${m.price}</span>`);
+      chips(document.getElementById('optSpice'), SPICE, 'spice', s => s);
+      chips(document.getElementById('optEgg'), EGG, 'egg', e => e.add ? `${e.th} <span class="opacity-60 ml-1">+${e.add}</span>` : e.th);
+      const meat = MEATS[state.meat], egg = EGG[state.egg];
+      document.getElementById('sheetTotal').textContent = meat.price + egg.add;
+      document.getElementById('sheetSummary').textContent = `${d.th}${meat.th} · ${SPICE[state.spice]}${egg.add ? ' · ' + egg.th : ''}`;
+    }
+    function openSheet(id) {
+      const d = DISHES.find(x => x.id === id);
+      Object.assign(state, { dish: d, meat: 0, spice: 2, egg: 0 });
+      const img = document.getElementById('sheetImg');
+      img.src = d.img; img.alt = d.th;
+      img.className = 'dish-img w-full h-full object-cover ' + d.fit;
+      document.getElementById('sheetEn').textContent = d.en;
+      document.getElementById('sheetTitle').textContent = d.th;
+      document.getElementById('sheetDesc').textContent = d.desc;
+      render();
+      sheet.showModal();
+      document.body.style.overflow = 'hidden';
+    }
+    grid.addEventListener('click', e => { const b = e.target.closest('[data-dish]'); if (b) openSheet(b.dataset.dish); });
+    sheet.addEventListener('click', e => {
+      const opt = e.target.closest('.opt');
+      if (opt) { state[opt.dataset.key] = +opt.dataset.i; render(); return; }
+      if (e.target.closest('[data-close]') || e.target === sheet) sheet.close();
+    });
+    sheet.addEventListener('close', () => { document.body.style.overflow = ''; });
+
+    /* ---------- Follow modal ----------
+       Pops up shortly after the page opens. Closing it hides it for the
+       rest of this visit; tapping a follow button hides it for 1 day. */
+    (function () {
+      const modal = document.getElementById('follow');
+      const KEY = 'knn-followed-until';
+      let followedUntil = 0, seenThisVisit = false;
+      try { followedUntil = +localStorage.getItem(KEY) || 0; } catch (e) {}
+      try { seenThisVisit = sessionStorage.getItem('knn-follow-seen') === '1'; } catch (e) {}
+      if (Date.now() < followedUntil || seenThisVisit) return;
+
+      setTimeout(() => {
+        if (sheet.open || modal.open) return;
+        modal.showModal();
+        document.body.style.overflow = 'hidden';
+      }, 1200);
+
+      modal.addEventListener('click', e => {
+        if (e.target.closest('[data-follow]')) {
+          try { localStorage.setItem(KEY, Date.now() + 1 * 864e5); } catch (err) {}
+          modal.close();
+          return;
+        }
+        if (e.target.closest('[data-close]') || e.target === modal) modal.close();
+      });
+      modal.addEventListener('close', () => {
+        document.body.style.overflow = '';
+        try { sessionStorage.setItem('knn-follow-seen', '1'); } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>
